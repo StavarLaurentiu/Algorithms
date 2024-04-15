@@ -1,0 +1,16 @@
+/Users/laur/Desktop/PA/Tema1/check_public/_utils/coding_style/check_cpp.py:57: DeprecationWarning: module 'sre_compile' is deprecated
+  import sre_compile
+./colorare.cpp:7:  { should almost always be at the end of the previous line  [whitespace/braces] [4]
+./colorare.cpp:9:  Could not find a newline character at the end of the file.  [whitespace/ending_newline] [5]
+./criptat.cpp:7:  { should almost always be at the end of the previous line  [whitespace/braces] [4]
+./criptat.cpp:9:  Could not find a newline character at the end of the file.  [whitespace/ending_newline] [5]
+./oferta.cpp:7:  { should almost always be at the end of the previous line  [whitespace/braces] [4]
+./oferta.cpp:9:  Could not find a newline character at the end of the file.  [whitespace/ending_newline] [5]
+./servere.cpp:7:  { should almost always be at the end of the previous line  [whitespace/braces] [4]
+./servere.cpp:9:  Could not find a newline character at the end of the file.  [whitespace/ending_newline] [5]
+Done processing ./colorare.cpp
+Done processing ./compresie.cpp
+Done processing ./criptat.cpp
+Done processing ./oferta.cpp
+Done processing ./servere.cpp
+Total errors found: 8
