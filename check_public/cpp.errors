@@ -1,16 +1,33 @@
-/Users/laur/Desktop/PA/Tema1/check_public/_utils/coding_style/check_cpp.py:57: DeprecationWarning: module 'sre_compile' is deprecated
+/Users/laur/Desktop/Tema1PA/check_public/_utils/coding_style/check_cpp.py:57: DeprecationWarning: module 'sre_compile' is deprecated
   import sre_compile
-./colorare.cpp:7:  { should almost always be at the end of the previous line  [whitespace/braces] [4]
-./colorare.cpp:9:  Could not find a newline character at the end of the file.  [whitespace/ending_newline] [5]
-./criptat.cpp:7:  { should almost always be at the end of the previous line  [whitespace/braces] [4]
-./criptat.cpp:9:  Could not find a newline character at the end of the file.  [whitespace/ending_newline] [5]
+./colorare.cpp:47:  Line ends in whitespace.  Consider deleting these extra spaces.  [whitespace/end_of_line] [4]
+./colorare.cpp:47:  { should almost always be at the end of the previous line  [whitespace/braces] [4]
+./colorare.cpp:73:  { should almost always be at the end of the previous line  [whitespace/braces] [4]
+./colorare.cpp:74:  Lines should be <= 80 characters long  [whitespace/line_length] [2]
+./colorare.cpp:82:  Line ends in whitespace.  Consider deleting these extra spaces.  [whitespace/end_of_line] [4]
+./colorare.cpp:83:  Lines should be <= 80 characters long  [whitespace/line_length] [2]
+./colorare.cpp:90:  Lines should be <= 80 characters long  [whitespace/line_length] [2]
+./colorare.cpp:115:  Could not find a newline character at the end of the file.  [whitespace/ending_newline] [5]
+./criptat.cpp:52:  Lines should be <= 80 characters long  [whitespace/line_length] [2]
+./criptat.cpp:59:  Line ends in whitespace.  Consider deleting these extra spaces.  [whitespace/end_of_line] [4]
+./criptat.cpp:59:  Redundant blank line at the end of a code block should be deleted.  [whitespace/blank_line] [3]
+./criptat.cpp:86:  Line ends in whitespace.  Consider deleting these extra spaces.  [whitespace/end_of_line] [4]
+./criptat.cpp:86:  { should almost always be at the end of the previous line  [whitespace/braces] [4]
+./criptat.cpp:94:  Could not find a newline character at the end of the file.  [whitespace/ending_newline] [5]
 ./oferta.cpp:7:  { should almost always be at the end of the previous line  [whitespace/braces] [4]
 ./oferta.cpp:9:  Could not find a newline character at the end of the file.  [whitespace/ending_newline] [5]
-./servere.cpp:7:  { should almost always be at the end of the previous line  [whitespace/braces] [4]
-./servere.cpp:9:  Could not find a newline character at the end of the file.  [whitespace/ending_newline] [5]
+./servere.cpp:8:  Found C system header after C++ system header. Should be: servere.h, c system, c++ system, other.  [build/include_order] [4]
+./servere.cpp:54:  Should have a space between // and comment  [whitespace/comments] [4]
+./servere.cpp:70:  Missing space before ( in if(  [whitespace/parens] [5]
+./servere.cpp:81:  Line ends in whitespace.  Consider deleting these extra spaces.  [whitespace/end_of_line] [4]
+./servere.cpp:82:  Line ends in whitespace.  Consider deleting these extra spaces.  [whitespace/end_of_line] [4]
+./servere.cpp:87:  Line ends in whitespace.  Consider deleting these extra spaces.  [whitespace/end_of_line] [4]
+./servere.cpp:94:  Line ends in whitespace.  Consider deleting these extra spaces.  [whitespace/end_of_line] [4]
+./servere.cpp:102:  { should almost always be at the end of the previous line  [whitespace/braces] [4]
+./servere.cpp:110:  Could not find a newline character at the end of the file.  [whitespace/ending_newline] [5]
 Done processing ./colorare.cpp
 Done processing ./compresie.cpp
 Done processing ./criptat.cpp
 Done processing ./oferta.cpp
 Done processing ./servere.cpp
-Total errors found: 8
+Total errors found: 25
