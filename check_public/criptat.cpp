@@ -1,14 +1,32 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <iostream>
+
 #include <fstream>
+#include <iostream>
 #include <numeric>
+#include <set>
 
 using namespace std;
 
 #define INPUT_FILE "criptat.in"
 #define OUTPUT_FILE "criptat.out"
+
+// A class to store the details of a word
+class Details {
+ public:
+    string word;
+    int num_of_dominant_chars;
+    int length;
+    double ratio;
+
+    Details(string word, int num_of_dominant_chars) {
+        this->word = word;
+        this->num_of_dominant_chars = num_of_dominant_chars;
+        this->length = word.length();
+        this->ratio = num_of_dominant_chars / (double)length;
+    }
+};
 
 int read_input(vector<string> &words) {
     ifstream fin(INPUT_FILE);
@@ -35,55 +53,88 @@ void print_output(int solution) {
     fout.close();
 }
 
-int compute_priority(string word, vector<int> alphabet, char dominant_letter) {
-    int priority = 0;
-
-    for (char c : word) {
-        if (c == dominant_letter) {
-            priority += alphabet[c - 'a'];
-        } else {
-            priority -= alphabet[c - 'a'];
+// Get the alphabet from the words -- all the unique characters
+void get_alphabet(int num_of_words, vector<string> words, set<char> &alphabet) {
+    for (int i = 0; i < num_of_words; i++) {
+        for (char c : words[i]) {
+            alphabet.insert(c);
         }
     }
-
-    return priority;
 }
 
-void my_sort(vector<string> &words, int num_of_words, vector<int> alphabet, char dominant_letter) {
-    vector<int> priority(num_of_words, 0);
-
+// Compute the number of dominant characters for each word
+void compute_num_of_dominant_chars(int num_of_words, vector<string> words,
+                    char dominant_char, vector<int> &num_of_dominant_chars) {
     for (int i = 0; i < num_of_words; i++) {
-        priority[i] = compute_priority(words[i], alphabet, dominant_letter);
+        for (char c : words[i]) {
+            if (c == dominant_char) {
+                num_of_dominant_chars[i]++;
+            }
+        }
+    }
+}
+
+// Compare function for sorting the words
+// by the ratio of (dominant characters / length)
+bool compare_func(Details a, Details b) {
+    if (a.ratio == b.ratio) {
+        return a.length > b.length;
     }
 
-    
+    return a.ratio > b.ratio;
 }
 
 int solve(int num_of_words, vector<string> words) {
-    // Take the alphabet as a freq vector
-    vector<int> alphabet(26, 0);
-    for (int i = 0; i < num_of_words; i++) {
-        for (char c : words[i]) {
-            alphabet[c - 'a']++;
+    // Take the alphabet from words -- all the unique characters
+    set<char> alphabet;
+    get_alphabet(num_of_words, words, alphabet);
+
+    // For each character in the alphabet,
+    // we will consider it the dominant character
+    int max_length = INT_MIN;
+    for (char dominant_char : alphabet) {
+        // Compute the number of dominant characters for each word
+        vector<int> num_of_dominant_chars(num_of_words, 0);
+        compute_num_of_dominant_chars(num_of_words, words, dominant_char,
+                                      num_of_dominant_chars);
+
+        // Populate the vector of word details
+        vector<Details> words_details(num_of_words, Details("", 0));
+        for (int i = 0; i < num_of_words; i++) {
+            words_details[i] = Details(words[i], num_of_dominant_chars[i]);
         }
+
+        // Sort the words by the ratio of (dominant characters / length)
+        sort(words_details.begin(), words_details.end(), compare_func);
+
+        // Compute the maximum length of the password that can be formed
+        // by concatenating the words in the order given by the sorted
+        // vector,choosing the words that keep true the condition
+        // num_of_dominant_chars > length / 2
+        int current_length = 0;
+        int current_num_of_dominant_chars = 0;
+        for (int i = 0; i < num_of_words; i++) {
+            int possible_length = current_length + words_details[i].length;
+            int possible_num_of_dominant_chars =
+                current_num_of_dominant_chars +
+                words_details[i].num_of_dominant_chars;
+
+            // If the condition is still true,
+            // we can add the word to the password
+            if (possible_num_of_dominant_chars > possible_length / 2) {
+                current_length = possible_length;
+                current_num_of_dominant_chars = possible_num_of_dominant_chars;
+            }
+        }
+
+        // Update the maximum length
+        max_length = max(max_length, current_length);
     }
 
-    // For every letter in the alphabet
-    for (int i = 0; i < 26; i++) {
-        // If the letter is not in the alphabet than skip it
-        if (alphabet[i] == 0) {
-            continue;
-        }
-
-        char letter = i + 'a';
-
-        // Sort the list of words, based on current dominant letter
-        my_sort(words, num_of_words, alphabet, letter);
-    }
+    return max_length;
 }
 
-int main(int argc, char *argv[])
-{   
+int main(int argc, char *argv[]) {
     vector<string> words;
     int num_of_words = read_input(words);
 

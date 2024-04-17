@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <iostream>
+
 #include <fstream>
+#include <iostream>
 #include <numeric>
 
 using namespace std;
@@ -39,9 +40,12 @@ void print_output(int result) {
 }
 
 int solve(vector<int> a, vector<int> b) {
+    // Check if the sum of the elements in the two arrays is the same
     int sum_a = accumulate(a.begin(), a.end(), 0);
     int sum_b = accumulate(b.begin(), b.end(), 0);
 
+    // If the sum of the elements in the two arrays is different
+    // then there is no solution
     if (sum_a != sum_b) {
         return -1;
     }
@@ -57,10 +61,12 @@ int solve(vector<int> a, vector<int> b) {
             index_in_a++;
             a[index_in_a] += a[index_in_a - 1];
         } else {
-            // Jump to the next element in the solution array
+            // If the elements are equal,
+            // jump to the next element in the solution array
             index_in_a++;
             index_in_b++;
 
+            // New character in the solution found
             solution++;
         }
     }

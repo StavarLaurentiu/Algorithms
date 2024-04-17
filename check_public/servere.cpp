@@ -1,11 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <iostream>
+#include <math.h>
+
+#include <algorithm>
 #include <fstream>
 #include <iomanip>
-#include <algorithm>
-#include <math.h>
+#include <iostream>
 
 using namespace std;
 
@@ -51,8 +52,7 @@ double solve(int num_of_servers, vector<int> &power, vector<int> &cost) {
 
     // Do a binary search to find the actual solution
     double left = INT_MIN;
-    //double right = *(max_element(power.begin(), power.end()));
-    double right = INT_MAX;
+    double right = *(max_element(power.begin(), power.end()));
 
     while (right - left > EPSILON) {
         double middle = (left + right) / 2;
@@ -67,7 +67,7 @@ double solve(int num_of_servers, vector<int> &power, vector<int> &cost) {
         }
 
         // If not all absolut calues are posible, search in the left side
-        if(!all_positive) {
+        if (!all_positive) {
             right = middle;
             continue;
         }
@@ -78,28 +78,27 @@ double solve(int num_of_servers, vector<int> &power, vector<int> &cost) {
             double diff = power[i] - middle;
 
             double current_interval_left = cost[i] - diff;
-            double current_interval_right = cost[i] + diff; 
-            
+            double current_interval_right = cost[i] + diff;
+
             interval_left = max(interval_left, current_interval_left);
             interval_rigth = min(interval_rigth, current_interval_right);
         }
 
-        // If interval_left is greater than interval_right 
-        // then the interval is not a valid one
+        // If interval_left is greater than interval_right
+        // then the interval is not a valid one so search in the left side
         if (interval_left > interval_rigth) {
             right = middle;
         } else {
             left = middle;
         }
-        
+
         solution = middle;
     }
 
     return solution;
 }
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
     vector<int> power, cost;
     int num_of_servers = read_input(power, cost);
 

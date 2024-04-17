@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <iostream>
+
 #include <fstream>
+#include <iostream>
 #include <numeric>
 
 using namespace std;
@@ -26,7 +27,7 @@ void print_output(long long solution) {
 // TOOK IT FROM THE LAB1 SOLUTION PROVIDED ON TEAMS
 int fast_pow(int base, int exponent, int mod) {
     if (exponent == 0) {
-       return 1;
+        return 1;
     }
 
     int remaining = 1;
@@ -43,8 +44,54 @@ int fast_pow(int base, int exponent, int mod) {
     return (1LL * remaining * base) % mod;
 }
 
-int main(int argc, char *argv[])
-{   
+// Appends the first rectangle in a zone to the painting
+void append_first_rectangle(long long &solution, char &prev_zone_type,
+            char zone_type, int &rectangles) {
+    switch (prev_zone_type) {
+        // If's the first rectangle in the painting
+        // then initiate the solution properly
+        case EMPTY_PAINTING:
+            if (zone_type == HORIZONTAL) {
+                solution = 6;
+            } else {
+                solution = 3;
+            }
+            break;
+
+        // If the previous zone was a HORIZONTAL one
+        // then update the solution properly
+        case HORIZONTAL:
+            if (zone_type == HORIZONTAL) {
+                solution = (solution * 3) % MOD;
+            }
+            break;
+
+        // If the previous zone was a VERTICAL one
+        // then update the solution properly
+        case VERTICAL:
+            solution = (solution * 2) % MOD;
+                break;
+
+            default:
+                break;
+        }
+
+    // Update prev_zone_type and the number of rectangles
+    prev_zone_type = zone_type;
+    rectangles--;
+}
+
+// Appends the rest of the rectangles in a zone to the painting
+void append_rest_of_rectangles(long long &solution,
+            int rectangles, char zone_type) {
+    if (zone_type == HORIZONTAL) {
+        solution = (solution * fast_pow(3, rectangles, MOD)) % MOD;
+    } else {
+        solution = (solution * fast_pow(2, rectangles, MOD)) % MOD;
+    }
+}
+
+long long solve() {
     // Declare input file
     ifstream fin(INPUT_FILE);
 
@@ -69,47 +116,19 @@ int main(int argc, char *argv[])
         fin >> zone_type;
 
         // Append the first rectangle to the painting
-        switch (prev_zone_type)
-        {
-        // If's the first rectangle in the painting initiate the solution properly
-        case EMPTY_PAINTING:
-            if (zone_type == HORIZONTAL) {
-                solution = 6;
-            } else {
-                solution = 3;
-            }
-            break;
-        
-        // If the previous zone was a HORIZONTAL one then update the solution properly
-        case HORIZONTAL:
-            if (zone_type == HORIZONTAL) {
-                solution = (solution * 3) % MOD;
-            }
-            break;
-
-        // If the previous zone was a VERTICAL one then update the solution properly
-        case VERTICAL:
-            solution = (solution * 2) % MOD;
-            break;
-
-        default:
-            break;
-        }
-
-        // Update prev_zone_type and the number of rectangles
-        prev_zone_type = zone_type;
-        rectangles--;
+        append_first_rectangle(solution, prev_zone_type, zone_type, rectangles);
 
         // Append the rest of the rectangles to painting
-        if (zone_type == HORIZONTAL) {
-            solution = (solution * fast_pow(3, rectangles, MOD)) % MOD;
-        } else {
-            solution = (solution * fast_pow(2, rectangles, MOD)) % MOD;
-        }
+        append_rest_of_rectangles(solution, rectangles, zone_type);
     }
 
-    print_output(solution);
-
     fin.close();
+    return solution;
+}
+
+int main(int argc, char *argv[]) {
+    long long solution = solve();
+
+    print_output(solution);
     return 0;
 }
