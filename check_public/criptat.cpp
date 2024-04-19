@@ -1,10 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
 #include <fstream>
-#include <iostream>
-#include <numeric>
 #include <set>
 
 using namespace std;
@@ -109,7 +103,7 @@ int solve(int num_of_words, vector<string> words) {
 
         // Compute the maximum length of the password that can be formed
         // by concatenating the words in the order given by the sorted
-        // vector,choosing the words that keep true the condition
+        // vector, choosing the words that keep true the condition
         // num_of_dominant_chars > length / 2
         int current_length = 0;
         int current_num_of_dominant_chars = 0;

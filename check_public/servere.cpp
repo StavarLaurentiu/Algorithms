@@ -1,12 +1,5 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <math.h>
-
-#include <algorithm>
 #include <fstream>
 #include <iomanip>
-#include <iostream>
 
 using namespace std;
 
@@ -32,7 +25,7 @@ int read_input(vector<int> &power, vector<int> &cost) {
         fin >> power[i];
     }
 
-    // Read the vector of powers
+    // Read the vector of costs
     for (int i = 0; i < num_of_servers; i++) {
         fin >> cost[i];
     }
