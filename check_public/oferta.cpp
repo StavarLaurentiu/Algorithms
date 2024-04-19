@@ -1,5 +1,6 @@
 #include <fstream>
 #include <iomanip>
+#include <vector>
 
 using namespace std;
 
@@ -57,10 +58,11 @@ double solve(int n, vector<int> prices) {
     return dp[n];
 }
 
-int main(int argc, char *argv[]) {
+int main() {
     int n;
     vector<int> prices;
     int k = read_input(prices, n);
+    k = k; // Avoid unused variable warning
 
     double solution = solve(n, prices);
 

@@ -1,5 +1,8 @@
 #include <fstream>
 #include <iomanip>
+#include <vector>
+#include <climits>
+#include <algorithm>
 
 using namespace std;
 
@@ -91,7 +94,7 @@ double solve(int num_of_servers, vector<int> &power, vector<int> &cost) {
     return solution;
 }
 
-int main(int argc, char *argv[]) {
+int main() {
     vector<int> power, cost;
     int num_of_servers = read_input(power, cost);
 

@@ -120,7 +120,7 @@ long long solve() {
     return solution;
 }
 
-int main(int argc, char *argv[]) {
+int main() {
     long long solution = solve();
 
     print_output(solution);

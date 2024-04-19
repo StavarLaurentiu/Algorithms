@@ -1,5 +1,8 @@
 #include <fstream>
 #include <set>
+#include <vector>
+#include <climits>
+#include <algorithm>
 
 using namespace std;
 
@@ -128,7 +131,7 @@ int solve(int num_of_words, vector<string> words) {
     return max_length;
 }
 
-int main(int argc, char *argv[]) {
+int main() {
     vector<string> words;
     int num_of_words = read_input(words);
 

@@ -1,5 +1,6 @@
 #include <fstream>
 #include <numeric>
+#include <vector>
 
 using namespace std;
 
@@ -46,7 +47,7 @@ int solve(vector<int> a, vector<int> b) {
     }
 
     int solution = 0, index_in_a = 0, index_in_b = 0;
-    while (index_in_a < a.size()) {
+    while (index_in_a < (int)a.size()) {
         if (a[index_in_a] > b[index_in_b]) {
             // Compress B
             index_in_b++;
