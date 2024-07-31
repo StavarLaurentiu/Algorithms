@@ -1,7 +1,3 @@
-Stavar Laurentiu-Cristian, Grupa 322CC
-Homework 1 PA
---------------------------------------------------------------------------------
-
 Total implementation time: ~16h
 
 1. servere.cpp:
